@@ -1,3 +1,3 @@
-# cowrywise-unsplash
+# unsplash mockup
 
 
