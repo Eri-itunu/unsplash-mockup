@@ -1,28 +1,29 @@
 <template>
-    <div @click="togglePopup" class="wrap">
+    <div v-if="item" @click="togglePopup" class="wrap">
         <div class="photoItem" >
             <img :src="item.urls.small" alt="Photo" />
         </div>
         <div class="nameOverlay" >  
-            <h4>{{ item.user.name }}</h4>
-            <p>{{item.user.location}}</p>
+            <h4>{{ item?.user.name }}</h4>
+            <p>{{item?.user.location}}</p>
         </div>
     </div>
     <Popup v-if="showPopup" :togglePopup="togglePopup">
-        <img class="popupPhoto" :src="item.urls.full" alt="Photo" />
+        <img class="popupPhoto" :src="item?.urls.full" alt="Photo" />
     </Popup>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
+import type {resultsArray} from "../../types";
 const showPopup = ref(false);
 const togglePopup = () => {
     showPopup.value = !showPopup.value;
 };
 import Popup from "./PopUp.vue";
-defineProps({
-    item: Array
-});
+const props = defineProps<{
+    item: resultsArray;
+}>();
 </script>
 
 <style scoped>

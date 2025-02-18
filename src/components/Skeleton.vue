@@ -6,12 +6,12 @@
     </div>
   </template>
   
-  <script setup>
+  <script setup lang="ts">
   import { ref, onMounted } from "vue";
   
   // Define height values directly as CSS values.
-  const heights = ["18rem",  "20rem", "24rem"];
-  const randomHeight = ref("");
+  const heights: string[] = ["18rem",  "20rem", "24rem"];
+  const randomHeight = ref<string>("");
   
   // Set a random height when the component mounts.
   onMounted(() => {

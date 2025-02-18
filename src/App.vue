@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import GridSkeleton from "./components/GridSkeleton.vue";
-import PhotoCard from "./components/PhotoCard.vue";
+import Skeleton from "@/components/Skeleton.vue";
+import PhotoCard from "@/components/PhotoCard.vue";
 import { Search } from 'lucide-vue-next';
-
+import type { UnsplashResponse } from "../types";
 const query = ref("");
 const searchQuery = ref("");
 const photo = ref<any[]>([]);
 const loading = ref(false);
+const total = ref(0)
 
 const startSearch = () => {
   searchQuery.value = query.value;
@@ -19,7 +20,7 @@ const getPhotos = async () => {
   loading.value = true;
   const searchParam = searchQuery.value || "african";
   try {
-    const res = await axios.get(
+    const res = await axios.get<UnsplashResponse>(
       `${import.meta.env.VITE_API_URL}?query=${searchParam}&per_page=12`, 
       {
         headers: {
@@ -27,7 +28,9 @@ const getPhotos = async () => {
         },
       }
     );
+
     photo.value = res.data.results;
+    total.value = res.data.total;
     loading.value = false;
   } catch (error: any) {
     loading.value = false;
@@ -39,7 +42,7 @@ const getPhotos = async () => {
 watch(searchQuery, getPhotos);
 
 onMounted(() => {
-  getPhotos(searchQuery.value);
+  getPhotos();
 });
 </script>
 
@@ -72,9 +75,9 @@ onMounted(() => {
       v-for="(skeleton, index) in 9"
       :key="index"
     >
-      <GridSkeleton />
+      <Skeleton />
     </div>
-    <div class="photoItem" v-for="(item, pos) in photo" :key="pos">
+    <div v-if="photo" class="photoItem"  v-for="(item, pos) in photo" :key="pos">
      
       <PhotoCard :item="item"  />
     </div>

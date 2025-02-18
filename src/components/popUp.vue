@@ -1,6 +1,6 @@
 <template>
     <div class="popup" >
-        <button @click="togglePopup">X</button>
+        <button @click="()=>togglePopup">X</button>
         <div class="popup-inner">
             <div class="popup-content">
                 <slot />
