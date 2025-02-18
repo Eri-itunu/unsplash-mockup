@@ -38,31 +38,33 @@ const getPhotos = async () => {
   }
 };
 
-// Fetch new photos when query changes
+
 watch(searchQuery, getPhotos);
 
 onMounted(() => {
   getPhotos();
 });
 </script>
-
+#2D3E50
 <template>
   <div class="mainHeader">
-    <h1 v-if="loading" >Searching for "{{ query }}"</h1>
-    <h1 v-if="searchQuery && !loading"> Search results for {{ searchQuery }}</h1>
-    <div class="form-group">
-      
-      <div class="input-container">
-        <div class="input-wrapper">
-          <input
-            id="search"
-            name="search"
-            placeholder="Search for a photo"
-            class="form-input"
-            v-model="query"
-            @keyup.enter="startSearch"
-          />
-          <Search class="folder-icon" />
+    <div class="subHeader" >
+      <h1 class="headerText" v-if="loading && query" >Searching for "{{ query }}"</h1>
+      <h1 class="headerText" v-if="searchQuery && !loading"> Search results for {{ searchQuery }}</h1>
+      <div class="form-group">
+        
+        <div class="input-container">
+          <div class="input-wrapper">
+            <input
+              id="search"
+              name="search"
+              placeholder="Search for a photo"
+              class="form-input"
+              v-model="query"
+              @keyup.enter="startSearch"
+            />
+            <Search class="search-icon" />
+          </div>
         </div>
       </div>
     </div>
@@ -85,7 +87,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Main header spans full viewport width */
+
 .mainHeader {
   width: 100vw;
   display: flex;
@@ -97,73 +99,90 @@ onMounted(() => {
   background-color: #DDE3EA;
 }
 
-/* Form group now spans 80% of the viewport width */
+.subHeader{
+  width:80vw;
+  text-align: left;
+}
+
+.headerText {
+  color: #2D3E50;
+  text-align: left;
+}
+
+
 .form-group {
   width: 80vw;
-  margin-bottom: 1rem; /* equivalent to mb-4 */
+  margin-bottom: 1rem; 
 }
 
-/* Label styling */
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem; /* equivalent to mb-2 */
-  font-size: 0.875rem; /* roughly text-sm */
-  font-weight: 500; /* font-medium */
-}
 
-/* Input container fills the form group */
 .input-container {
   width: 100%;
   position: relative;
-  margin-top: 0.5rem; /* equivalent to mt-2 */
-  border-radius: 0.375rem; /* equivalent to rounded-md */
+  margin-top: 0.5rem; 
+  border-radius: 0.375rem; 
 }
 
-/* Wrapper to position the icon */
+
 .input-wrapper {
   position: relative;
 }
 
-/* Input styling */
+
 .form-input {
   display: block;
   width: 100%;
-  border-radius: 0.375rem; /* rounded-md */
-  border: 1px solid #e5e7eb; /* border-gray-200 */
+  border-radius: 0.375rem; 
+  border: 1px solid #e5e7eb; 
   padding: 20px;
-  padding-left: 2.5rem; /* leaves space for the icon */
-  font-size: 0.875rem; /* text-sm */
+  padding-left: 2.5rem; 
+  font-size: 0.875rem; 
   outline: 2px solid transparent;
 }
 
 .form-input::placeholder {
-  color: #6b7280; /* placeholder:text-gray-500 */
+  color: #6b7280; 
 }
 
-/* Icon styling */
-.folder-icon {
+
+.search-icon {
   pointer-events: none;
   position: absolute;
-  left: 0.75rem; /* equivalent to left-3 */
-  top: 50%; /* equivalent to top-1/2 */
+  left: 0.75rem; 
+  top: 50%; 
   height: 18px;
   width: 18px;
-  transform: translateY(-50%); /* centers vertically */
-  color: #6b7280; /* text-gray-500 */
+  transform: translateY(-50%);
+  color: #6b7280; 
 }
 
-/* Change icon color when the input is focused */
-.input-wrapper:focus-within .folder-icon {
-  color: #111827; /* equivalent to peer-focus:text-gray-900 */
+
+.input-wrapper:focus-within .search-icon {
+  color: #111827;
 }
 
-/* Photo gallery styles */
+
 .photoGallery {
   column-count: 3;
   column-gap: 40px;
   width: 70%;
   margin: auto;
-  margin-top: -50px; /* Moves the gallery up, overlapping header */
+  margin-top: -50px;
+}
+
+
+@media (max-width: 1024px) {
+  .photoGallery {
+    column-count: 2;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .photoGallery {
+    column-count: 1;
+    width: 90%;
+  }
 }
 
 .photoItem {

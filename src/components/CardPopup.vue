@@ -1,47 +1,100 @@
 <template>
-    <div class="popup" >
-        <button @click="()=>togglePopup">X</button>
+    <div class="popup">
+      <div class="popup-wrapper">
         <div class="popup-inner">
-            <div class="popup-content">
-                <slot />
-            </div>
+          <div class="popup-content">
+            <slot />
+          </div>
         </div>
-
+        <button class="close-btn" @click="notifyParent"> <X/> </button>
+      </div>
     </div>
+  </template>
+  
+  <script setup lang="ts">
+  import { X } from 'lucide-vue-next';
+  defineProps<{
+    
+  }>();
 
-</template>
+  const emit = defineEmits<{
+    (e: 'custom-event'): void;
+  }>();
 
-<script setup lang="ts">
+  const notifyParent =()=>{
+    emit('custom-event');
+  }
+  </script>
+  
+  <style scoped>
+  .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; 
+}
 
-defineProps({
-    togglePopup: Function
-});
+.popup-wrapper {
+  position: relative;
+  width: 80%;
+  max-width: 800px; 
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-</script>
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
 
-<style  scoped>
-.popup{
-    position: fixed;
-    top:0;
-    left:0;
-    right: 0 ;
-    bottom: 0;
-    z-index: 99;
-    background-color: rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.popup-content {
+  display: flex;
+  flex-direction: column;
+}
 
+.popup-content img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.popup-content h2,
+.popup-content p {
+  margin: 0;
+  padding: 1rem 20px;
 }
 
 
-.popup-inner{
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    height: 80%
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-</style>
+@media (max-width: 768px) {
+  .popup-wrapper {
+    width: 95%;
+  }
+  .popup-content h2,
+  .popup-content p {
+    padding: 0.5rem 10px;
+  }
+}
+  
+
+  </style>
+  
