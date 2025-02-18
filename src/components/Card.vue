@@ -20,7 +20,7 @@ const showPopup = ref(false);
 const togglePopup = () => {
     showPopup.value = !showPopup.value;
 };
-import Popup from "./PopUp.vue";
+import Popup from "./Popup.vue";
 const props = defineProps<{
     item: resultsArray;
 }>();
