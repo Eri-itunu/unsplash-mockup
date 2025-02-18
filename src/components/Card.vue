@@ -8,15 +8,15 @@
             <p>{{item?.user.location}}</p>
         </div>
     </div>
-    <Popup v-if="showPopup" :togglePopup="togglePopup">
+    <CardPopup v-if="showPopup" :togglePopup="togglePopup">
         <img class="popupPhoto" :src="item?.urls.full" alt="Photo" />
-    </Popup>
+    </CardPopup>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
 import type {resultsArray} from "../../types";
-import Popup from "./Popup.vue";
+import Popup from "@/components/CardPopup.vue";
 const showPopup = ref(false);
 const togglePopup = () => {
     showPopup.value = !showPopup.value;
