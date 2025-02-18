@@ -84,7 +84,7 @@ const props = defineProps<{
 .nameOverlay {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   color: white;
   display: flex;
   justify-content: end;
@@ -95,6 +95,13 @@ const props = defineProps<{
   border-radius: 8px;
   padding-bottom: 20px;
   padding-left: 20px;
+}
+
+.nameOverlay h4, p {
+  margin: 0;
+  padding:0;
+  font-weight: thin;
+
 }
 
 .nameOverlay:hover {
