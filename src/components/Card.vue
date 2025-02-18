@@ -11,8 +11,8 @@
   <Popup class="popupPhoto" v-if="showPopupState" @custom-event="togglePopup">
     <div class="popup-content">
       <img :src="item?.urls.small_s3" alt="Photo" />
-      <h3>{{ item.user.name }}</h3>
-      <p>{{ item.user.location }}</p>
+      <h3  >{{ item.user.name }}</h3>
+      <p class="moveLeft" >{{ item.user.location }}</p>
     </div>
   </Popup>
 </template>
@@ -58,15 +58,18 @@ const props = defineProps<{
   padding-left: 20px;
   font-size: 1.5rem;
 }
-
-.popup-content h3,p{
-  padding-left: 20px;
+.moveLeft{
+  padding-left: 30px;
 }
 .popup-content h3{
-  padding-top: 20px;
+  padding-left: 30px;
+  color: #2D3E50;
+}
+.popup-content h3{
+  padding-top: 30px;
 }
 .popup-content p{
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 

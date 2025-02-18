@@ -1,14 +1,16 @@
 <template>
-    <div class="popup">
-      <div class="popup-wrapper">
-        <div class="popup-inner">
-          <div class="popup-content">
-            <slot />
+    <transition name="popup-animation" >
+      <div class="popup">
+        <div class="popup-wrapper">
+          <div class="popup-inner">
+            <div class="popup-content">
+              <slot />
+            </div>
           </div>
+          <button class="close-btn" @click="notifyParent"> <X/> </button>
         </div>
-        <button class="close-btn" @click="notifyParent"> <X/> </button>
       </div>
-    </div>
+    </transition>
   </template>
   
   <script setup lang="ts">
@@ -27,6 +29,20 @@
   </script>
   
   <style scoped>
+
+  .popup-animation-enter-active,
+  .popup-animation-leave-active {
+    transition: opacity .3s cubic-bezier(0.52,0.02,0.19,1.02);
+  }
+
+  .popup-animation-enter-from,
+  .popup-animation-leave-to
+  {
+    opacity: 0;
+  }
+
+
+
   .popup {
   position: fixed;
   top: 0;
@@ -83,6 +99,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  color:white;
 }
 
 @media (max-width: 768px) {
