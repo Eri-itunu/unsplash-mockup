@@ -2,7 +2,7 @@
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import Skeleton from "@/components/Skeleton.vue";
-import PhotoCard from "@/components/PhotoCard.vue";
+import Card from "@/components/Card.vue";
 import { Search } from 'lucide-vue-next';
 import type { UnsplashResponse } from "../types";
 const query = ref("");
@@ -79,7 +79,7 @@ onMounted(() => {
     </div>
     <div v-if="photo" class="photoItem"  v-for="(item, pos) in photo" :key="pos">
      
-      <PhotoCard :item="item"  />
+      <Card :item="item"  />
     </div>
   </div>
 </template>
