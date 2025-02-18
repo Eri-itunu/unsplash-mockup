@@ -16,11 +16,12 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import type {resultsArray} from "../../types";
+import Popup from "./Popup.vue";
 const showPopup = ref(false);
 const togglePopup = () => {
     showPopup.value = !showPopup.value;
 };
-import Popup from "@/components/Popup.vue";
+
 const props = defineProps<{
     item: resultsArray;
 }>();
